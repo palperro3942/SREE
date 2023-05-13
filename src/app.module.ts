@@ -21,6 +21,11 @@ import { PerfilFinalInventarioDeFelderModule } from './perfil_final_inventario_d
 import { PreguntasController } from './preguntas/preguntas.controller';
 import { PreguntasService } from './preguntas/preguntas.service';
 import { PreguntasModule } from './preguntas/preguntas.module';
+import { CarrerasController } from './carreras/carreras.controller';
+import { AlumnosController } from './alumnos/alumnos.controller';
+import { CuestionariosController } from './cuestionarios/cuestionarios.controller';
+import { GruposAsignadosController } from './grupos_asignados/grupos_asignados.controller';
+import { PerfilFinalInventarioDeFelderController } from './perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.controller';
 
 @Module({
   imports: [
@@ -36,7 +41,7 @@ import { PreguntasModule } from './preguntas/preguntas.module';
     PerfilFinalInventarioDeFelderModule,
     PreguntasModule,
   ],
-  controllers: [AppController, GruposController, GenericController, InventarioDeFelderController, PreguntasController],
-  providers: [AppService, AlumnosService, CuestionariosService, GruposService, GenericService, InventarioDeFelderService, PreguntasService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

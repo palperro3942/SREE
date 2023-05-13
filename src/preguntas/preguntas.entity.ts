@@ -6,10 +6,10 @@ export class Preguntas extends GenericEntity{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   id_cuestionario: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   num_pregunta: number;
 
   @Column({ type: 'varchar' })

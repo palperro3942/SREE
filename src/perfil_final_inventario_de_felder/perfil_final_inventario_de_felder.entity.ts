@@ -6,10 +6,10 @@ export class PerfilFinalInventarioDeFelder extends GenericEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   nro_cuenta: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   grupo: number;
 
   @Column({ type: 'varchar' })

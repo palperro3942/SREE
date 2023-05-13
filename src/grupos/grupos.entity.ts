@@ -3,12 +3,12 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Grupos extends GenericEntity{
-  @PrimaryGeneratedColumn()
+  @Column()
   id_grupo: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   grupo: number;
 
-  @Column({ type: 'string' })
+  @Column({ type: 'varchar' })
   id_carrera: string;
 }

@@ -6,9 +6,9 @@ export class GruposAsignados extends GenericEntity{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   id_profesor: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   id_grupo: number;
 }

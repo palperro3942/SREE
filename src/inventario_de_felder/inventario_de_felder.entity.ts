@@ -6,13 +6,13 @@ export class InventarioDeFelder extends GenericEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   nro_cuenta: number;
 
   @Column({ type: 'varchar' })
   respuestas_compactadas: string;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'int' })
   grupo: number;
 }
 
