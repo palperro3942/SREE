@@ -18,5 +18,23 @@ export class AlumnosController extends GenericController<Alumnos,AlumnosService>
   async create(@Body() entity: Alumnos) {
     return this.alumnosService.create(entity);
   }
+
+  @Post('login')
+  async login(@Body() body: { nroCuenta: number; password: string }) {
+    const { nroCuenta, password } = body;
+
+    // Buscar el alumno basado en el nroCuenta
+    const alumno = await this.alumnosService.obtenerAlumno(nroCuenta, password);
+
+    if (!alumno || alumno.contraseña !== password) {
+      // El inicio de sesión falló
+      // Devolver un error o un objeto con el mensaje de error correspondiente
+      return { error: 'Credenciales inválidas' };
+    }
+
+    // Inicio de sesión exitoso
+    return { message: 'Inicio de sesión exitoso', alumno };
+  }
+
 }
 

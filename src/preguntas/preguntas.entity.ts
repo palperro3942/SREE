@@ -1,5 +1,6 @@
 import { GenericEntity } from 'src/generic/generic.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Cuestionarios } from '../cuestionarios/cuestionarios.entity';
 
 @Entity()
 export class Preguntas extends GenericEntity{
@@ -8,6 +9,10 @@ export class Preguntas extends GenericEntity{
 
   @Column({ type: 'int' })
   id_cuestionario: number;
+
+  @ManyToOne(() => Cuestionarios, cuestionario => cuestionario.preguntas)
+  @JoinColumn({ name: 'id_cuestionario', referencedColumnName: 'id_cuestionario' })
+  cuestionario: Cuestionarios;
 
   @Column({ type: 'int' })
   num_pregunta: number;

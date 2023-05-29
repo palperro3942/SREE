@@ -7,7 +7,20 @@ import { GenericService } from 'src/generic/generic.service';
 @Injectable()
 export class AlumnosService extends GenericService<Alumnos> {
   constructor(
-    @InjectRepository(Alumnos) alumnosRepository: Repository<Alumnos>) {
-      super(alumnosRepository)
+    @InjectRepository(Alumnos) private readonly alumnosRepository: Repository<Alumnos>
+  ) {
+    super(alumnosRepository);
+  }
+
+  async obtenerAlumno(nroCuenta: number, password: string): Promise<Alumnos> {
+    const alumno = await this.alumnosRepository.findOne({
+      where: { nro_cuenta: nroCuenta },
+    });
+
+    if (alumno && alumno.contraseña === password) {
+      return alumno;
     }
+
+    return null;
+  }
 }

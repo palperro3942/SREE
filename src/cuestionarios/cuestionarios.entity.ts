@@ -1,12 +1,14 @@
 import { GenericEntity } from 'src/generic/generic.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, Index} from 'typeorm';
+import { Preguntas } from '../preguntas/preguntas.entity';
 
 @Entity()
 export class Cuestionarios extends GenericEntity{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({type: 'int'})
+  @Index() // crear el índice en la columna
+  @Column({ type: 'int'})
   id_cuestionario: number;
 
   @Column({ type: 'int' })
@@ -17,4 +19,9 @@ export class Cuestionarios extends GenericEntity{
 
   @Column({ type: 'varchar' })
   descripcion: string;
+  
+  // Relación con la entidad Preguntas
+  @OneToMany(() => Preguntas, pregunta => pregunta.cuestionario)
+  @JoinColumn({ name: 'id_cuestionario' })
+  preguntas: Preguntas[];
 }
