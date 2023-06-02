@@ -5,5 +5,5 @@ export class AlumnosImportData{
     apellido_1: string;
     apellido_2: string;
     fecha_nacimiento: Date;
-    id_grupo: number;
+    grupo: number;
 }

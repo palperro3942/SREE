@@ -25,7 +25,7 @@ export class ProfesorService extends GenericService<Profesor> {
     
     await new Promise<void>((resolve, reject) => {
       fs.createReadStream(filePath)
-        .pipe(csvParser({ headers: ['nro_cuenta', 'contraseña', 'nombre', 'apellido_1', 'apellido_2', 'fecha_nacimiento', 'id_grupo'] })) // Especificar los nombres de las columnas
+        .pipe(csvParser({ headers: ['nro_cuenta', 'contraseña', 'apellido_1', 'apellido_2', 'nombre', 'fecha_nacimiento', 'id_grupo'] })) // Especificar los nombres de las columnas
         .on('data', (data: any) => {
           const alumnos = new AlumnosImportData();
           alumnos.nro_cuenta = data.nro_cuenta;
@@ -34,7 +34,7 @@ export class ProfesorService extends GenericService<Profesor> {
           alumnos.apellido_1 = data.apellido_1;
           alumnos.apellido_2 = data.apellido_2;
           alumnos.fecha_nacimiento = data.fecha_nacimiento;
-          alumnos.id_grupo = data.id_grupo;
+          alumnos.grupo = data.id_grupo;
           entities.push(alumnos);
         })
         .on('end', () => resolve())
@@ -50,7 +50,7 @@ export class ProfesorService extends GenericService<Profesor> {
           alumnos.apellido_1 = entity.apellido_1;
           alumnos.apellido_2 = entity.apellido_2;
           alumnos.fecha_nacimiento = entity.fecha_nacimiento;
-          alumnos.id_grupo = entity.id_grupo;
+          alumnos.grupo = entity.grupo;
           return alumnos;
         });
 

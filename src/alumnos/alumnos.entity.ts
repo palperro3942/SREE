@@ -25,5 +25,5 @@ export class Alumnos extends GenericEntity {
   fecha_nacimiento: Date;
 
   @Column({ type: 'int' })
-  id_grupo: number;
+  grupo: number;
 }
