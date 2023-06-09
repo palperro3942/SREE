@@ -8,10 +8,16 @@ export class Profesor extends GenericEntity{
   id: number;
 
   @Column()
+  id_profesor: number;
+
+  @Column()
   nombre_profesor: string;
 
   @Column()
-  contraseña: string;
+  nro_empleado: number;
+
+  @Column()
+  contra: string;
 
   @Column({nullable:true})
   estrategia_preferida: string;

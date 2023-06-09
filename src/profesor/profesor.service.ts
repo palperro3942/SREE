@@ -1,25 +1,43 @@
 import * as fs from 'fs';
 import * as csvParser from 'csv-parser';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { Profesor } from './profesor.entity';
 import { GenericService } from 'src/generic/generic.service';
 import { AlumnosImportData } from './dto/alumnos.dto';
 import { Alumnos } from 'src/alumnos/alumnos.entity';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class ProfesorService extends GenericService<Profesor> {
   constructor(
     @InjectRepository(Profesor)
-    profesorRepository: Repository<Profesor>,
+    private readonly profesorRepository: Repository<Profesor>,
     @InjectRepository(Alumnos)
     private readonly alumnosRepository: Repository<Alumnos>,
   ) {
     super(profesorRepository);
   }
 
-  //Importar Jovenes
+  // Login Profesores
+  async login(loginDto: LoginDto): Promise<Profesor> {
+    const { nro_empleado, contra } = loginDto;
+
+    if (!nro_empleado || !contra) {
+      throw new UnauthorizedException('Credenciales inválidas');
+    }
+
+    const options: FindOneOptions<Profesor> = {where: {nro_empleado, contra}};
+    const profesor = await this.profesorRepository.findOne(options);
+
+    if (!profesor) {
+      throw new UnauthorizedException('Credenciales inválidas');
+    }
+    return profesor;
+  }
+
+  // Importar Jovenes
   async parseCsvToEntities(filePath: string): Promise<AlumnosImportData[]> {
     const entities: AlumnosImportData[] = [];
     

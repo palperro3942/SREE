@@ -13,6 +13,7 @@ import { PerfilFinalInventarioDeFelderModule } from './perfil_final_inventario_d
 import { PreguntasModule } from './preguntas/preguntas.module';
 import { ProfesorModule } from './profesor/profesor.module';
 import { EstrategiaEnsenanzaModule } from './estrategias_enseñanza/estrategias_enseñanza.module';
+import { MateriasModule } from './materias/materias.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { EstrategiaEnsenanzaModule } from './estrategias_enseñanza/estrategias_
     PreguntasModule,
     ProfesorModule,
     EstrategiaEnsenanzaModule,
+    MateriasModule,
   ],
   controllers: [AppController],
   providers: [AppService],

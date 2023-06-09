@@ -3,6 +3,7 @@ import { Profesor } from './profesor.entity';
 import { ProfesorService } from './profesor.service';
 import { GenericController } from 'src/generic/generic.controller';
 import { AlumnosImportData } from './dto/alumnos.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('profesores')
 export class ProfesorController extends GenericController<Profesor, ProfesorService> {
@@ -10,7 +11,10 @@ export class ProfesorController extends GenericController<Profesor, ProfesorServ
     super(profesorService);
   }
 
-  @Get()
+  @Post('login')
+  async login(@Body() loginDto: LoginDto) {
+    return this.profesorService.login(loginDto);
+  }
 
   @Get('/importaralumnos')
   async getCsvData(): Promise<AlumnosImportData[]> {
