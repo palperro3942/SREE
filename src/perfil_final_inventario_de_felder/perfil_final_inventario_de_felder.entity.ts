@@ -28,20 +28,20 @@ export class PerfilFinalInventarioDeFelder extends GenericEntity {
   secuencial_global: string;
 
   @ManyToOne(() => EstrategiaEnsenanza, { eager: true })
-  @JoinColumn({ name: 'EE1', referencedColumnName: 'id' })
-  EE1: Partial<EstrategiaEnsenanza>; // Utilizamos Partial para indicar que solo necesitamos algunos campos de la entidad
+  @JoinColumn({ name: 'ee1', referencedColumnName: 'id' })
+  ee1: Partial<EstrategiaEnsenanza>; // Utilizamos Partial para indicar que solo necesitamos algunos campos de la entidad
 
   @ManyToOne(() => EstrategiaEnsenanza, { eager: true })
-  @JoinColumn({ name: 'EE2', referencedColumnName: 'id' })
-  EE2: Partial<EstrategiaEnsenanza>;
+  @JoinColumn({ name: 'ee2', referencedColumnName: 'id' })
+  ee2: Partial<EstrategiaEnsenanza>;
 
   @ManyToOne(() => EstrategiaEnsenanza, { eager: true })
-  @JoinColumn({ name: 'EE3', referencedColumnName: 'id' })
-  EE3: Partial<EstrategiaEnsenanza>;
+  @JoinColumn({ name: 'ee3', referencedColumnName: 'id' })
+  ee3: Partial<EstrategiaEnsenanza>;
 
   @ManyToOne(() => EstrategiaEnsenanza, { eager: true })
-  @JoinColumn({ name: 'EE4', referencedColumnName: 'id' })
-  EE4: Partial<EstrategiaEnsenanza>;
+  @JoinColumn({ name: 'ee4', referencedColumnName: 'id' })
+  ee4: Partial<EstrategiaEnsenanza>;
 
   @ManyToOne(() => Profesor, profesor => profesor.perfilesFinales)
   //@JoinColumn({ name: 'grupo', referencedColumnName: 'grupo' })

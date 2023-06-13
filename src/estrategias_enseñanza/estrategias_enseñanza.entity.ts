@@ -13,16 +13,16 @@ export class EstrategiaEnsenanza extends GenericEntity{
   @Column({type: 'text'})
   descripcion: string;
 
-  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.EE1)
+  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.ee1)
   perfilesFinalesEE1: PerfilFinalInventarioDeFelder[];
 
-  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.EE2)
+  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.ee2)
   perfilesFinalesEE2: PerfilFinalInventarioDeFelder[];
 
-  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.EE3)
+  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.ee3)
   perfilesFinalesEE3: PerfilFinalInventarioDeFelder[];
 
-  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.EE4)
+  @OneToMany(() => PerfilFinalInventarioDeFelder, perfilfinal => perfilfinal.ee4)
   perfilesFinalesEE4: PerfilFinalInventarioDeFelder[];
   static createQueryBuilder: any;
 }
