@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { GruposService } from './grupos.service';
 import { Grupos } from './grupos.entity';
 import { GenericController } from 'src/generic/generic.controller';
@@ -17,5 +17,11 @@ export class GruposController extends GenericController<Grupos,GruposService>{
   @Post()
   async create(@Body() entity: Grupos){
     return this.gruposService.create(entity);
+  }
+
+  @Get('id_grupo/:id')
+  async findByGrupoId(@Param('id') idGrupos: string) {
+    const ids = idGrupos.split(',').map(Number);
+    return this.gruposService.findByGrupoIds(ids);
   }
 }

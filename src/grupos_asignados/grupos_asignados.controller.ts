@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { GruposAsignadosService } from './grupos_asignados.service';
 import { GruposAsignados } from './grupos_asignados.entity';
 import { GenericController } from 'src/generic/generic.controller';
@@ -17,6 +17,12 @@ export class GruposAsignadosController extends GenericController<GruposAsignados
   @Post()
   async create(@Body() entity: GruposAsignados){
     return this.gruposAsignadosService.create(entity);
+  }
+
+  // El objetivo es obtener el id_profesor para trabajar con el en vez del id
+  @Get('id_profesor/:id')
+  async findByProfesorId(@Param('id') idProfesor: number) {
+    return this.gruposAsignadosService.findAllByProfesorId(idProfesor);
   }
 }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { GenericController } from 'src/generic/generic.controller';
 import { PerfilFinalInventarioDeFelder } from './perfil_final_inventario_de_felder.entity';
 import { PerfilFinalInventarioDeFelderService } from './perfil_final_inventario_de_felder.service';
@@ -17,5 +17,11 @@ export class PerfilFinalInventarioDeFelderController extends GenericController<P
   @Post()
   async create(@Body() entity: PerfilFinalInventarioDeFelder) {
     return this.perfilFinalInventarioDeFelderService.create(entity);
+  }
+
+  @Get('id_grupo/:id')
+  async findByGrupoId(@Param('id') idGrupos: string) {
+    const ids = idGrupos.split(',').map(Number);
+    return this.perfilFinalInventarioDeFelderService.findByGrupoIds(ids);
   }
 }
