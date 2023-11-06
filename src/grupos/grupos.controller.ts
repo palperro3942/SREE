@@ -24,4 +24,12 @@ export class GruposController extends GenericController<Grupos,GruposService>{
     const ids = idGrupos.split(',').map(Number);
     return this.gruposService.findByGrupoIds(ids);
   }
+
+  @Post('asignar-estrategias/:grupoId')
+  async asignarEstrategias(
+    @Param('grupoId') grupoId: number,
+    @Body() estrategias: number[] // Un arreglo de IDs de estrategias de enseñanza
+  ) {
+    return this.gruposService.asignarEstrategias(grupoId, estrategias);
+  }
 }

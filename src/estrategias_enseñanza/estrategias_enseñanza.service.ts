@@ -7,8 +7,7 @@ import { EstrategiaEnsenanza } from './estrategias_enseñanza.entity';
 @Injectable()
 export class EstrategiaEnsenanzaService extends GenericService<EstrategiaEnsenanza> {
   constructor(
-    @InjectRepository(EstrategiaEnsenanza)
-    private readonly estrategiaEnsenanzaRepository: Repository<EstrategiaEnsenanza>,
+    @InjectRepository(EstrategiaEnsenanza) estrategiaEnsenanzaRepository: Repository<EstrategiaEnsenanza>
   ) {
     super(estrategiaEnsenanzaRepository);
   }

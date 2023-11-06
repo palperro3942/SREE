@@ -14,6 +14,7 @@ import { PreguntasModule } from './preguntas/preguntas.module';
 import { ProfesorModule } from './profesor/profesor.module';
 import { EstrategiaEnsenanzaModule } from './estrategias_enseñanza/estrategias_enseñanza.module';
 import { MateriasModule } from './materias/materias.module';
+import { AdministradorModule } from './administrador/administrador.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { MateriasModule } from './materias/materias.module';
     ProfesorModule,
     EstrategiaEnsenanzaModule,
     MateriasModule,
+    AdministradorModule,
   ],
   controllers: [AppController],
   providers: [AppService],

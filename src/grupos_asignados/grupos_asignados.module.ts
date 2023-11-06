@@ -5,10 +5,7 @@ import { GruposAsignadosService } from './grupos_asignados.service';
 import { GruposAsignados } from './grupos_asignados.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([GruposAsignados]),
-    // Otros módulos importados
-  ],
+  imports: [TypeOrmModule.forFeature([GruposAsignados])],
   controllers: [GruposAsignadosController],
   providers: [GruposAsignadosService],
 })
