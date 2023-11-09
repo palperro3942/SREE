@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { GruposService } from './grupos.service';
 import { Grupos } from './grupos.entity';
 import { GenericController } from 'src/generic/generic.controller';
+import { get } from 'http';
 
 @Controller('grupos')
 export class GruposController extends GenericController<Grupos,GruposService>{
@@ -23,6 +24,12 @@ export class GruposController extends GenericController<Grupos,GruposService>{
   async findByGrupoId(@Param('id') idGrupos: string) {
     const ids = idGrupos.split(',').map(Number);
     return this.gruposService.findByGrupoIds(ids);
+  }
+
+  @Post('grupo')
+  async findGrupo(@Body() grupo:any){
+    console.log(grupo);
+    return this.gruposService.find(grupo);
   }
 
   @Post('asignar-estrategias/:grupoId')
