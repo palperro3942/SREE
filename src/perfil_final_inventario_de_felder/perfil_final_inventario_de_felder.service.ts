@@ -21,6 +21,10 @@ export class PerfilFinalInventarioDeFelderService extends GenericService<PerfilF
     return this.perfilFinalInventarioDeFelderRepository.find({ where: { grupo: In(ids) } });
   }
 
+  async findResultadoAlumno(numAlumno: number): Promise<PerfilFinalInventarioDeFelder[]> {
+    return this.perfilFinalInventarioDeFelderRepository.find({ where: { nro_cuenta: numAlumno } });
+  }
+
   find(options?: FindManyOptions<PerfilFinalInventarioDeFelder>): Promise<PerfilFinalInventarioDeFelder[]> {
     return this.perfilFinalInventarioDeFelderRepository.find(options);
   }
@@ -30,7 +34,7 @@ export class PerfilFinalInventarioDeFelderService extends GenericService<PerfilF
     const perfiles = await this.perfilFinalInventarioDeFelderRepository.find({
       where: { grupo: idGrupo },
       relations: ['ee1', 'ee2', 'ee3', 'ee4'],
-    });//Ojo idGrupo es para el grupo especificamente
+    });//Ojo idGrupo es para el numero grupo especificamente
 
     // Crear un objeto para realizar un seguimiento de la frecuencia de cada estrategia de enseñanza
     const estrategiasFrecuencia: { [key: string]: number } = {};

@@ -13,9 +13,11 @@ export class AlumnosService extends GenericService<Alumnos> {
   }
 
   async obtenerAlumno(nroCuenta: number, password: string): Promise<Alumnos> {
-    const alumno = await this.alumnosRepository.findOne({
-      where: { nro_cuenta: nroCuenta },
-    });
+    if(nroCuenta===undefined){
+      return null
+    }
+
+    const alumno = await this.alumnosRepository.findOne({where: { nro_cuenta: nroCuenta }});
 
     if (alumno && alumno.contraseña === password) {
       return alumno;

@@ -20,12 +20,11 @@ export class AlumnosController extends GenericController<Alumnos,AlumnosService>
   }
 
   @Post('login')
-  async login(@Body() body: { nroCuenta: number; password: string }) {
-    const { nroCuenta, password } = body;
-
+  async login(@Body() body: { nro_cuenta: number; password: string }) {
+    const { nro_cuenta, password } = body;
     // Buscar el alumno basado en el nroCuenta
-    const alumno = await this.alumnosService.obtenerAlumno(nroCuenta, password);
-
+    const alumno = await this.alumnosService.obtenerAlumno(nro_cuenta, password);
+    
     if (!alumno || alumno.contraseña !== password) {
       // El inicio de sesión falló
       // Devolver un error o un objeto con el mensaje de error correspondiente

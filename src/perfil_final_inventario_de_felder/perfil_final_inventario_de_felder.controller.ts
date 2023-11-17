@@ -26,9 +26,14 @@ export class PerfilFinalInventarioDeFelderController extends GenericController<P
   }
 
   @Get('id_alumno/:id')
-  async findByAlumnoId(@Param('id') idGrupos: string) {
-    const ids = idGrupos.split(',').map(Number);
-    return this.perfilFinalInventarioDeFelderService.findByGrupoIds(ids);
+  async findByAlumnoId(@Param('id') idAlumno: string) {
+    const ids = idAlumno.split(',').map(Number);
+    return this.perfilFinalInventarioDeFelderService.findByAlumnoIds(ids);
+  }
+
+  @Get('alumno/:id')
+  async findByNumAlumno(@Param('id') numAlumno: number) {
+    return this.perfilFinalInventarioDeFelderService.findResultadoAlumno(numAlumno);
   }
 
   @Get('moda_estrategias/:id_grupo')
