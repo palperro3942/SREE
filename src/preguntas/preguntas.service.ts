@@ -8,9 +8,17 @@ import { Preguntas } from './preguntas.entity';
 export class PreguntasService extends GenericService<Preguntas> {
   constructor(
     @InjectRepository(Preguntas)
-    preguntasRepository: Repository<Preguntas>,
+    private readonly preguntasRepository: Repository<Preguntas>,
   ) {
     super(preguntasRepository);
+  }
+
+  async preguntasByIdCuestionario (idCuestionario: number): Promise<Preguntas[]> {
+    const preguntas = await this.preguntasRepository.find({ 
+      where: { id_cuestionario: idCuestionario },
+      order: { num_pregunta:'ASC' },
+    });
+    return preguntas;
   }
 }
 

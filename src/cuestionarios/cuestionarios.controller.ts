@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CuestionariosService } from './cuestionarios.service';
 import { Cuestionarios } from './cuestionarios.entity';
 import { GenericController } from 'src/generic/generic.controller';
@@ -17,6 +17,11 @@ export class CuestionariosController extends GenericController<Cuestionarios,Cue
   @Post()
   async create(@Body() entity: Cuestionarios){
     return this.cuestionariosService.create(entity);
+  }
+
+  @Get()
+  async findById(@Param(':id') idCuestionario: number){
+    return this.cuestionariosService.findByIdCuestionario(idCuestionario)
   }
 }
 

@@ -44,6 +44,5 @@ export class PerfilFinalInventarioDeFelder extends GenericEntity {
   ee4: Partial<EstrategiaEnsenanza>;
 
   @ManyToOne(() => Profesor, profesor => profesor.perfilesFinales)
-  //@JoinColumn({ name: 'grupo', referencedColumnName: 'grupo' })
   profesor: Profesor;
 }

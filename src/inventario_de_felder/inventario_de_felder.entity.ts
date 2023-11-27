@@ -15,4 +15,3 @@ export class InventarioDeFelder extends GenericEntity {
   @Column({ type: 'int' })
   grupo: number;
 }
-

@@ -32,7 +32,7 @@ export class AlumnosController extends GenericController<Alumnos,AlumnosService>
     }
 
     // Inicio de sesión exitoso
-    return { message: 'Inicio de sesión exitoso', alumno };
+    return alumno;
   }
 
 }

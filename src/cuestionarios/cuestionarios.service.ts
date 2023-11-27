@@ -7,7 +7,11 @@ import { GenericService } from 'src/generic/generic.service';
 @Injectable()
 export class CuestionariosService extends GenericService<Cuestionarios>{
   constructor(
-    @InjectRepository(Cuestionarios) cuestionariosRepository: Repository<Cuestionarios>) {
+    @InjectRepository(Cuestionarios) private readonly cuestionariosRepository: Repository<Cuestionarios>) {
       super(cuestionariosRepository)
     }
+
+  async findByIdCuestionario(idCuestionario: number): Promise<Cuestionarios[]> {
+    return this.cuestionariosRepository.find({ where: { id_cuestionario: idCuestionario } });
+  }
 }

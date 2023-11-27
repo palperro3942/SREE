@@ -14,6 +14,9 @@ export class GruposService extends GenericService<Grupos>{
     super(gruposRepository);
   }
   
+  async findByNumGrupo (numGrupo: number): Promise<Grupos>{
+    return this.gruposRepository.findOne( { where: { grupo: numGrupo }, relations: ['cuestionario'] });
+  }
 
   async findByGrupoIds(ids: number[]): Promise<Grupos[]> {
     return this.gruposRepository.find({ where: { id_grupo: In(ids) } });
