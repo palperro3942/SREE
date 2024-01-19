@@ -3,10 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EstrategiaEnsenanza } from './estrategias_enseñanza.entity';
 import { EstrategiaEnsenanzaController } from './estrategias_enseñanza.controller';
 import { EstrategiaEnsenanzaService } from './estrategias_enseñanza.service';
+import { PerfilFinalInventarioDeFelder } from 'src/perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.entity';
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([EstrategiaEnsenanza])],
+  imports: [TypeOrmModule.forFeature([EstrategiaEnsenanza, PerfilFinalInventarioDeFelder])],
   controllers: [EstrategiaEnsenanzaController],
   providers: [EstrategiaEnsenanzaService],
   exports: [EstrategiaEnsenanzaService],

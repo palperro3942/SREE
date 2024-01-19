@@ -6,6 +6,7 @@ import { GenericService } from 'src/generic/generic.service';
 import { RespuestasCompactadasDto } from './dto/respuestas_compactadas.dto';
 import { PerfilFinalInventarioDeFelder } from 'src/perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.entity';
 import { ModeloFelder } from './inventario_de_felder.model';
+import { EstrategiaEnsenanzaService } from 'src/estrategias_enseñanza/estrategias_enseñanza.service';
 
 @Injectable()
 export class InventarioDeFelderService extends GenericService<InventarioDeFelder>{
@@ -14,6 +15,7 @@ export class InventarioDeFelderService extends GenericService<InventarioDeFelder
         private readonly InventarioDeFelderRepository: Repository<InventarioDeFelder>,
         @InjectRepository(PerfilFinalInventarioDeFelder)
         private readonly perfilFinalRepository: Repository<PerfilFinalInventarioDeFelder>,
+        private readonly estrategiaEnseñanzaService: EstrategiaEnsenanzaService
     ){
         super(InventarioDeFelderRepository);
     }
@@ -124,10 +126,12 @@ export class InventarioDeFelderService extends GenericService<InventarioDeFelder
             existingProfile.secuencial_global = recuentos.aux_4;
 
             await this.perfilFinalRepository.save(existingProfile);
+            await this.estrategiaEnseñanzaService.generarEstrategia(resultadoEncuestaDto.nro_cuenta);
             return existingProfile;
         } else {
             // Si no existe, guardarlo normalmente
             await this.perfilFinalRepository.save(perfilFinal);
+            await this.estrategiaEnseñanzaService.generarEstrategia(resultadoEncuestaDto.nro_cuenta);
             return perfilFinal;
         }
     }

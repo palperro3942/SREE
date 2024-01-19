@@ -15,7 +15,7 @@ export class InventarioDeFelderController extends GenericController<InventarioDe
         return this.inventarioDeFelderService.find();
     }
 
-    @Post()
+    @Post()//Solo pruebas no se utilice en produccion
     async create(@Body() entity: InventarioDeFelder){
         return this.inventarioDeFelderService.create(entity);
     }

@@ -6,7 +6,7 @@ import { InventarioDeFelderController } from './inventario_de_felder.controller'
 import { PerfilFinalInventarioDeFelder } from 'src/perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([InventarioDeFelder]),TypeOrmModule.forFeature([PerfilFinalInventarioDeFelder])],
+    imports: [TypeOrmModule.forFeature([InventarioDeFelder, PerfilFinalInventarioDeFelder])],
     providers: [InventarioDeFelderService],
     controllers: [InventarioDeFelderController]
 })

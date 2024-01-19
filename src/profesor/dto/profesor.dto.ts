@@ -1,4 +1,4 @@
 export class ProfesorDTO {
-    id: number;
+    id_profesor: number;
     nombre_profesor: string;
   }

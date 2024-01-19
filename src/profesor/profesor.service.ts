@@ -8,6 +8,7 @@ import { GenericService } from 'src/generic/generic.service';
 import { AlumnosImportData } from './dto/alumnos.dto';
 import { Alumnos } from 'src/alumnos/alumnos.entity';
 import { LoginDto } from './dto/login.dto';
+import { ProfesorDTO } from './dto/profesor.dto';
 
 @Injectable()
 export class ProfesorService extends GenericService<Profesor> {
@@ -21,7 +22,7 @@ export class ProfesorService extends GenericService<Profesor> {
   }
 
   // Login Profesores
-  async login(loginDto: LoginDto): Promise<Profesor> {
+  async login(loginDto: LoginDto): Promise<ProfesorDTO> {
     const { nro_empleado, contra } = loginDto;
 
     if (!nro_empleado || !contra) {
@@ -34,7 +35,12 @@ export class ProfesorService extends GenericService<Profesor> {
     if (!profesor) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
-    return profesor;
+
+    const info = new ProfesorDTO();
+    info.id_profesor = profesor.id_profesor;
+    info.nombre_profesor = profesor.nombre_profesor;
+
+    return info;
   }
 
   // Importar Jovenes

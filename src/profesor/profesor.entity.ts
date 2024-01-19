@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
 import { GenericEntity } from 'src/generic/generic.entity';
 import { PerfilFinalInventarioDeFelder } from 'src/perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Profesor extends GenericEntity{
@@ -16,6 +17,7 @@ export class Profesor extends GenericEntity{
   @Column()
   nro_empleado: number;
 
+  @Exclude()
   @Column()
   contra: string;
 
