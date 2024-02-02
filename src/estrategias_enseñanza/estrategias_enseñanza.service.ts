@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 import { GenericService } from 'src/generic/generic.service';
 import { EstrategiaEnsenanza } from './estrategias_enseñanza.entity';
 import { PerfilFinalInventarioDeFelder } from 'src/perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.entity';
+import { Grupos } from 'src/grupos/grupos.entity';
 
 @Injectable()
 export class EstrategiaEnsenanzaService extends GenericService<EstrategiaEnsenanza> {
   constructor(
     @InjectRepository(PerfilFinalInventarioDeFelder)private perfilFinalRepository: Repository<PerfilFinalInventarioDeFelder>,
-    @InjectRepository(EstrategiaEnsenanza) estrategiaEnsenanzaRepository: Repository<EstrategiaEnsenanza>
+    @InjectRepository(EstrategiaEnsenanza) estrategiaEnsenanzaRepository: Repository<EstrategiaEnsenanza>,
+    @InjectRepository(Grupos) private gruposRepository: Repository<Grupos>,
   ) {
     super(estrategiaEnsenanzaRepository);
   }
@@ -75,6 +77,51 @@ export class EstrategiaEnsenanzaService extends GenericService<EstrategiaEnsenan
     );
 
     return perfil;
+  }
+  
+  // Calcular Moda ids por inventario de felder y guardar modas en grupos
+  async calcularYGuardarModaParaGrupo(numGrupo: number): Promise<void> {
+    const perfiles = await this.perfilFinalRepository.find({
+      where: { grupo: numGrupo },
+      relations: ['ee1', 'ee2', 'ee3', 'ee4'],
+    });
+
+    // Crear un objeto para realizar un seguimiento de la frecuencia de cada estrategia de enseñanza
+    const estrategiasFrecuencia: { [key: string]: number } = {};
+
+    // Recorrer los perfiles y contar la frecuencia de cada estrategia de enseñanza
+    perfiles.forEach((perfil) => {
+      if (perfil.ee1 && perfil.ee1.id) {
+        estrategiasFrecuencia[perfil.ee1.id.toString()] = (estrategiasFrecuencia[perfil.ee1.id.toString()] || 0) + 1;
+      }
+
+      if (perfil.ee2 && perfil.ee2.id) {
+        estrategiasFrecuencia[perfil.ee2.id.toString()] = (estrategiasFrecuencia[perfil.ee2.id.toString()] || 0) + 1;
+      }
+
+      if (perfil.ee3 && perfil.ee3.id) {
+        estrategiasFrecuencia[perfil.ee3.id.toString()] = (estrategiasFrecuencia[perfil.ee3.id.toString()] || 0) + 1;
+      }
+
+      if (perfil.ee4 && perfil.ee4.id) {
+        estrategiasFrecuencia[perfil.ee4.id.toString()] = (estrategiasFrecuencia[perfil.ee4.id.toString()] || 0) + 1;
+      }
+    });
+
+    // Encontrar las estrategias más frecuentes
+    const estrategiasOrdenadas = Object.keys(estrategiasFrecuencia).sort((a, b) => estrategiasFrecuencia[b] - estrategiasFrecuencia[a]);
+    const estrategiasModa = estrategiasOrdenadas.slice(0, 4).map(Number);
+
+    // Guardar las estrategias más frecuentes en la tabla Grupos
+    await this.gruposRepository.update(
+      { grupo: numGrupo },
+      {
+        ee1: { id: estrategiasModa[0] || null }, 
+        ee2: { id: estrategiasModa[1] || null },
+        ee3: { id: estrategiasModa[2] || null },
+        ee4: { id: estrategiasModa[3] || null },
+      },
+    );
   }
   
 }

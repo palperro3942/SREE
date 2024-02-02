@@ -11,11 +11,12 @@ export class EstrategiaEnsenanzaController extends GenericController<EstrategiaE
 
   @Get('make/:nroCuenta')
   async generarEstrategia(@Param('nroCuenta') nroCuenta: number) {
-    try {
       return this.estrategiaEnsenanzaService.generarEstrategia(nroCuenta)
-    } catch (error) {
-      console.error(error);
-    }
+  }
+
+  @Get('save_moda_estrategias/:num_grupo')
+  async saveModaEstrategiasBynumGrupo(@Param('num_grupo') numGrupo: number) {
+    return this.estrategiaEnsenanzaService.calcularYGuardarModaParaGrupo(numGrupo);
   }
 }
 

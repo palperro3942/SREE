@@ -1,0 +1,6 @@
+-validar que solo acepte numeros al iniciar sesion en el numero de empleado y contraseña
+-corregir la cookie del nombre
+-corregir los apellidos o nombres con Ñ o acentos de la BD
+-mostrar alerta al guardar las respuestas si no están contestadas todas e intentar resaltar las que quedarón pendientes de responder
+Para backend
+-cada nuevo semestre el grupo de los alumnos debe cambiar

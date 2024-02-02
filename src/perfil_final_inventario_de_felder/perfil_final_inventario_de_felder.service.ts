@@ -3,12 +3,14 @@ import { PerfilFinalInventarioDeFelder } from './perfil_final_inventario_de_feld
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, In, Repository } from 'typeorm';
 import { GenericService } from 'src/generic/generic.service';
+import { Grupos } from 'src/grupos/grupos.entity';
 
 @Injectable()
 export class PerfilFinalInventarioDeFelderService extends GenericService<PerfilFinalInventarioDeFelder> {
   constructor(
     @InjectRepository(PerfilFinalInventarioDeFelder)
     private readonly perfilFinalInventarioDeFelderRepository: Repository<PerfilFinalInventarioDeFelder>,
+    @InjectRepository(Grupos) private gruposRepository: Repository<Grupos>,
   ) {
     super(perfilFinalInventarioDeFelderRepository);
   }
@@ -30,11 +32,11 @@ export class PerfilFinalInventarioDeFelderService extends GenericService<PerfilF
   }
 
   //Calcular la moda de inventario de Felder
-  async findModaEstrategiasByGrupoId(idGrupo: number): Promise<string[]> {
+  async findModaEstrategiasByNumGrupo(numGrupo: number): Promise<string[]> {
     const perfiles = await this.perfilFinalInventarioDeFelderRepository.find({
-      where: { grupo: idGrupo },
+      where: { grupo: numGrupo },
       relations: ['ee1', 'ee2', 'ee3', 'ee4'],
-    });//Ojo idGrupo es para el numero grupo especificamente
+    });//Ojo numGrupo es para el numero grupo especificamente
 
     // Crear un objeto para realizar un seguimiento de la frecuencia de cada estrategia de enseñanza
     const estrategiasFrecuencia: { [key: string]: number } = {};

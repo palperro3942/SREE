@@ -127,11 +127,13 @@ export class InventarioDeFelderService extends GenericService<InventarioDeFelder
 
             await this.perfilFinalRepository.save(existingProfile);
             await this.estrategiaEnseñanzaService.generarEstrategia(resultadoEncuestaDto.nro_cuenta);
+            await this.estrategiaEnseñanzaService.calcularYGuardarModaParaGrupo(resultadoEncuestaDto.grupo);
             return existingProfile;
         } else {
             // Si no existe, guardarlo normalmente
             await this.perfilFinalRepository.save(perfilFinal);
             await this.estrategiaEnseñanzaService.generarEstrategia(resultadoEncuestaDto.nro_cuenta);
+            await this.estrategiaEnseñanzaService.calcularYGuardarModaParaGrupo(resultadoEncuestaDto.grupo);
             return perfilFinal;
         }
     }

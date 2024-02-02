@@ -36,9 +36,9 @@ export class PerfilFinalInventarioDeFelderController extends GenericController<P
     return this.perfilFinalInventarioDeFelderService.findResultadoAlumno(numAlumno);
   }
 
-  @Get('moda_estrategias/:id_grupo')
-  async findModaEstrategiasByGrupoId(@Param('id_grupo') idGrupo: number) {
-    return this.perfilFinalInventarioDeFelderService.findModaEstrategiasByGrupoId(idGrupo);
+  @Get('moda_estrategias/:num_grupo')
+  async findModaEstrategiasBynumGrupo(@Param('num_grupo') numGrupo: number) {
+    return this.perfilFinalInventarioDeFelderService.findModaEstrategiasByNumGrupo(numGrupo);
   }
 
   @Post('test')

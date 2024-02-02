@@ -30,6 +30,11 @@ export class GruposController extends GenericController<Grupos,GruposService>{
     return this.gruposService.findByNumGrupo(numGrupo)
   }
 
+  @Get('grupo/conteo/:numGrupo')
+  async findConteoByNumGrupo(@Param('numGrupo') numGrupo: number){
+    return this.gruposService.obtenerConteoAlumnosPorEstrategia(numGrupo)
+  }
+
   @Post('grupo')
   async findGrupo(@Body() grupo:any){
     return this.gruposService.find(grupo);
