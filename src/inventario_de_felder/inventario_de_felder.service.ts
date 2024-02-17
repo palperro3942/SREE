@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 import { GenericService } from 'src/generic/generic.service';
 import { RespuestasCompactadasDto } from './dto/respuestas_compactadas.dto';
 import { PerfilFinalInventarioDeFelder } from 'src/perfil_final_inventario_de_felder/perfil_final_inventario_de_felder.entity';
-import { ModeloFelder } from './inventario_de_felder.model';
 import { EstrategiaEnsenanzaService } from 'src/estrategias_enseñanza/estrategias_enseñanza.service';
+import { GruposService } from 'src/grupos/grupos.service';
 
 @Injectable()
 export class InventarioDeFelderService extends GenericService<InventarioDeFelder>{
@@ -15,7 +15,8 @@ export class InventarioDeFelderService extends GenericService<InventarioDeFelder
         private readonly InventarioDeFelderRepository: Repository<InventarioDeFelder>,
         @InjectRepository(PerfilFinalInventarioDeFelder)
         private readonly perfilFinalRepository: Repository<PerfilFinalInventarioDeFelder>,
-        private readonly estrategiaEnseñanzaService: EstrategiaEnsenanzaService
+        private readonly estrategiaEnseñanzaService: EstrategiaEnsenanzaService,
+        private readonly gruposService: GruposService,
     ){
         super(InventarioDeFelderRepository);
     }
@@ -128,12 +129,14 @@ export class InventarioDeFelderService extends GenericService<InventarioDeFelder
             await this.perfilFinalRepository.save(existingProfile);
             await this.estrategiaEnseñanzaService.generarEstrategia(resultadoEncuestaDto.nro_cuenta);
             await this.estrategiaEnseñanzaService.calcularYGuardarModaParaGrupo(resultadoEncuestaDto.grupo);
+            await this.gruposService.calcularYActualizarConteoEstrategias(resultadoEncuestaDto.grupo);
             return existingProfile;
         } else {
             // Si no existe, guardarlo normalmente
             await this.perfilFinalRepository.save(perfilFinal);
             await this.estrategiaEnseñanzaService.generarEstrategia(resultadoEncuestaDto.nro_cuenta);
             await this.estrategiaEnseñanzaService.calcularYGuardarModaParaGrupo(resultadoEncuestaDto.grupo);
+            await this.gruposService.calcularYActualizarConteoEstrategias(resultadoEncuestaDto.grupo);
             return perfilFinal;
         }
     }

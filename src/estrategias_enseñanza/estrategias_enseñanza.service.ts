@@ -75,6 +75,7 @@ export class EstrategiaEnsenanzaService extends GenericService<EstrategiaEnsenan
         ee4: { id: estrategiaEnseñanza.ee4 }
       }
     );
+    console.log(estrategiaEnseñanza, nroCuenta)
 
     return perfil;
   }
